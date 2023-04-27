@@ -1,0 +1,87 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ page_name }}{% endblock %}
+
+{% block body %}
+    <div class="col-lg-12">
+        <div class="card body row col-lg-12 d-flex justify-content-between mx-0 py-2">
+            {% if errors %}
+                {% include 'validation/errors.html.twig' %}
+            {% endif %}
+            <form class="form-horizontal" method="post" action="/create-team" autocomplete="off">
+                <div class="box-body">
+                    <div class="mb-3">
+                        <h4>Team</h4>
+                    </div>
+                    <div class="mb-3">
+                        <label for="teamName" class="col-12">
+                            <dt>Team name</dt>
+                        </label>
+
+                        <div class="col-12 col-xl-8 col-xxl-6">
+                            <input type="text" class="form-control" name="name" id="teamName"
+                                   placeholder="New team name"
+                                   value="">
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="countryName" class="col-12">
+                            <dt>Country</dt>
+                        </label>
+
+                        <div class="col-12 col-xl-8 col-xxl-6">
+                            <input type="text" class="form-control" name="country" id="countryName"
+                                   placeholder="Country"
+                                   value="">
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="balance" class="col-12">
+                            <dt>Money balance</dt>
+                        </label>
+
+                        <div class="col-12 col-xl-8 col-xxl-6">
+                            <input type="number" class="form-control" name="balance" id="balance"
+                                   placeholder="Money balance"
+                                   value="">
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <h4>Players</h4>
+                    </div>
+                    <div class="players">
+                        <div class="mb-3 row ">
+                            <div class="col-4">
+                                <input type="text" class="form-control" name="players[1][name]" id="playerName"
+                                       placeholder="Player name"
+                                       value="">
+                            </div>
+                            <div class="col-4">
+                                <input type="text" class="form-control" name="players[1][surename]" id="surName"
+                                       placeholder="Player surname"
+                                       value="">
+                            </div>
+                            <div class="col-3">
+                                <input type="number" class="form-control" name="players[1][price]" id="price"
+                                       placeholder="Player price"
+                                       value="">
+                            </div>
+
+                            <div class="col-1 d-flex justify-content-end">
+                                <button class="btn bg-primary new-player-row" type="button"> <i class="fa-solid fa-plus"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="box-footer d-md-flex justify-content-md-end mt-5">
+                    <a href="/teams" class="btn bg-primary mx-5">Back to teams page</a>
+                    <button class="btn bg-primary" type="submit">Save team</button>
+                </div>
+            </form>
+        </div>
+
+
+    </div>
+
+{% endblock %}

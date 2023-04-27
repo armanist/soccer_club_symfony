@@ -1,0 +1,10 @@
+<div class="alert alert-danger">
+    <ul>
+        {% for error in errors %}
+            <li>{{ error.message ~ ' [' ~ error.propertyPath ~ ']' }}</li>
+        {% endfor %}
+    </ul>
+</div>
+
+
+

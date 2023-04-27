@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ page_name }}{% endblock %}
+
+{% block body %}
+    <div class="col-lg-12 mb-3">
+        <div class="accordion" id="accordionPanelsStayOpenExample">
+            {% for team in teams %}
+                <div class="accordion-item">
+                    <div class="row col-lg-12 d-flex justify-content-between mx-0 py-2" id="panelsStayOpen-heading{{ team.id }}">
+                        <div class="accordion-header col-lg-10  d-flex justify-content-between collapsed"
+                             data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapse{{ team.id }}"
+                             aria-expanded="true" aria-controls="panelsStayOpen-collapse{{ team.id }}">
+                            <h2>
+                                {{ team.name }}
+                            </h2>
+                            <div>
+                                <h5 class="mt-2">Balance $ {{ team.balance }}</h5>
+                            </div>
+                        </div>
+                        <div class="col-lg-2 d-flex justify-content-end">
+                            <a href="/buy-player/{{ team.id }}" class="btn bg-primary">Buy player</a>
+                        </div>
+                    </div>
+                    <div id="panelsStayOpen-collapse{{ team.id }}" class="accordion-collapse collapse {{ team.id != 1 ? '' : 'show' }}"
+                         aria-labelledby="panelsStayOpen-heading{{ team.id }}">
+                        <div class="accordion-body p-0 mbt-2">
+                            <ul class="list-group">
+                                {% for player in team.players %}
+                                    <li class="list-group-item d-flex justify-content-between">
+                                        <span>{{ player.name }}</span>
+                                        <div class="form-group d-flex">
+                                            <label class="form-check-label" for="flexSwitchCheckDefault">Available for sale</label>
+                                            <div class="form-check form-switch ms-2">
+                                                <input class="form-check-input available-for-sale" type="checkbox" {{ player.isAvailableForSale ? 'checked' : ''}} value="{{ player.id }}" id="flexSwitchCheckDefault">
+                                            </div>
+                                        </div>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+
+            {% if previous >= 0 %}
+                <a href="{{ path('teams', { offset: previous }) }}">Previous</a>
+            {% endif %}
+            {% if next < teams|length %}
+                <a href="{{ path('teams', { offset: next }) }}">Next</a>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}
